@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "node set-env.js && npm run build",
   "outputDirectory": "dist/yaquedo-web/browser",
   "framework": null,
   "installCommand": "npm install",
