@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { SolicitudService } from '../../../core/services/solicitud.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { PerfilService } from '../../../core/services/perfil.service';
 import { EstadoSolicitud, SolicitudResponse } from '../../../core/models/solicitud.model';
 
 @Component({
@@ -36,6 +37,7 @@ import { EstadoSolicitud, SolicitudResponse } from '../../../core/models/solicit
 export class MyRequestsComponent implements OnInit {
   private readonly solicitudes = inject(SolicitudService);
   readonly auth = inject(AuthService);
+  private readonly perfil = inject(PerfilService);
   private readonly snack = inject(MatSnackBar);
 
   loading = signal(true);
@@ -50,13 +52,26 @@ export class MyRequestsComponent implements OnInit {
     const user = this.auth.currentUser();
     if (!user) return;
     this.loading.set(true);
-    const obs = user.role === 'TRABAJADOR'
-      ? this.solicitudes.listPorTrabajador(user.id)
-      : this.solicitudes.listPorCliente(user.id);
-    obs.subscribe({
-      next: r => { this.data.set(r); this.loading.set(false); },
-      error: () => this.loading.set(false)
-    });
+
+    if (user.role === 'TRABAJADOR') {
+      this.solicitudes.listPorTrabajador(user.id).subscribe({
+        next: r => { this.data.set(r); this.loading.set(false); },
+        error: () => this.loading.set(false)
+      });
+    } else {
+      this.perfil.getClienteByUsuario(user.id).subscribe({
+        next: cliente => {
+          this.solicitudes.listPorCliente(cliente.id).subscribe({
+            next: r => { this.data.set(r); this.loading.set(false); },
+            error: () => this.loading.set(false)
+          });
+        },
+        error: () => {
+          this.loading.set(false);
+          this.snack.open('No se pudo cargar tu perfil de cliente', 'Cerrar', { duration: 3000 });
+        }
+      });
+    }
   }
 
   badgeColor(estado: EstadoSolicitud): string {
