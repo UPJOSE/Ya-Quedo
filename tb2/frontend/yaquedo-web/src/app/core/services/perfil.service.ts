@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { ClienteResponse, UpdateClienteRequest, UpdateTrabajadorRequest } from '../models/perfil.model';
+import { ClienteResponse, CreateClienteRequest, UpdateClienteRequest, UpdateTrabajadorRequest } from '../models/perfil.model';
 import { TrabajadorResponse } from '../models/trabajador.model';
 
 @Injectable({ providedIn: 'root' })
@@ -14,6 +14,10 @@ export class PerfilService {
 
   getClienteByUsuario(usuarioId: string): Observable<ClienteResponse> {
     return this.http.get<ClienteResponse>(`${this.clienteBase}/usuario/${usuarioId}`);
+  }
+
+  createCliente(body: CreateClienteRequest): Observable<ClienteResponse> {
+    return this.http.post<ClienteResponse>(this.clienteBase, body);
   }
 
   updateCliente(id: string, body: UpdateClienteRequest): Observable<ClienteResponse> {

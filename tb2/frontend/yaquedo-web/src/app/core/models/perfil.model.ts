@@ -6,6 +6,13 @@ export interface ClienteResponse {
   telefono: string;
 }
 
+export interface CreateClienteRequest {
+  usuarioId: string;
+  nombres: string;
+  apellidos: string;
+  telefono: string;
+}
+
 export interface UpdateClienteRequest {
   nombres: string;
   apellidos: string;

@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../core/services/auth.service';
 import { PerfilService } from '../../core/services/perfil.service';
-import { ClienteResponse } from '../../core/models/perfil.model';
+import { ClienteResponse, CreateClienteRequest } from '../../core/models/perfil.model';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -41,8 +41,15 @@ export class MiPerfilComponent implements OnInit {
   saving = signal(false);
   cliente = signal<ClienteResponse | null>(null);
   perfilNoEncontrado = signal(false);
+  creandoPerfil = signal(false);
 
   form = this.fb.nonNullable.group({
+    nombres: ['', [Validators.required, Validators.maxLength(80)]],
+    apellidos: ['', [Validators.required, Validators.maxLength(80)]],
+    telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]]
+  });
+
+  formCreate = this.fb.nonNullable.group({
     nombres: ['', [Validators.required, Validators.maxLength(80)]],
     apellidos: ['', [Validators.required, Validators.maxLength(80)]],
     telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]]
@@ -66,6 +73,7 @@ export class MiPerfilComponent implements OnInit {
         error: () => {
           this.perfilNoEncontrado.set(true);
           this.loading.set(false);
+          this.creandoPerfil.set(true);
         }
       });
     } else {
@@ -89,6 +97,34 @@ export class MiPerfilComponent implements OnInit {
       error: err => {
         this.saving.set(false);
         this.snack.open(err?.error?.message ?? 'No se pudo actualizar', 'Cerrar', { duration: 3000 });
+      }
+    });
+  }
+
+  crearPerfil(): void {
+    if (this.formCreate.invalid) {
+      this.formCreate.markAllAsTouched();
+      return;
+    }
+    const user = this.auth.currentUser();
+    if (!user) return;
+
+    this.saving.set(true);
+    const body: CreateClienteRequest = {
+      usuarioId: user.id,
+      ...this.formCreate.getRawValue()
+    };
+    this.perfil.createCliente(body).subscribe({
+      next: c => {
+        this.cliente.set(c);
+        this.perfilNoEncontrado.set(false);
+        this.creandoPerfil.set(false);
+        this.saving.set(false);
+        this.snack.open('Perfil creado correctamente', 'Cerrar', { duration: 3000 });
+      },
+      error: err => {
+        this.saving.set(false);
+        this.snack.open(err?.error?.message ?? 'No se pudo crear el perfil', 'Cerrar', { duration: 3000 });
       }
     });
   }

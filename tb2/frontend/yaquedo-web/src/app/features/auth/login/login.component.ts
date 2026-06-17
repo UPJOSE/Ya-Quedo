@@ -52,7 +52,7 @@ export class LoginComponent {
     this.auth.login(this.form.getRawValue()).subscribe({
       next: () => {
         this.snack.open('Bienvenido a Ya Quedo', 'Cerrar', { duration: 2000 });
-        this.router.navigate(['/trabajadores']);
+        this.router.navigate(['/app']);
       },
       error: (err) => {
         this.loading.set(false);
