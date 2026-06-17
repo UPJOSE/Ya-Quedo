@@ -112,6 +112,17 @@
             </form>
           </mat-card-content>
         </mat-card>
+      } @else {
+        <mat-card class="info-card">
+          <mat-card-content class="empty-state">
+            <mat-icon style="font-size:48px;width:48px;height:48px;" color="warn">error_outline</mat-icon>
+            <h3>No se pudo cargar el perfil</h3>
+            <p>Intenta recargar la pagina o contacta soporte si el problema persiste.</p>
+            <button mat-raised-button color="primary" (click)="ngOnInit()">
+              <mat-icon>refresh</mat-icon> Reintentar
+            </button>
+          </mat-card-content>
+        </mat-card>
       }
     }
   }

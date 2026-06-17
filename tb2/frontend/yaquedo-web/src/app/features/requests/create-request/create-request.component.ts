@@ -84,7 +84,7 @@ export class CreateRequestComponent implements OnInit {
     this.solicitudes.create(body).subscribe({
       next: () => {
         this.snack.open('Solicitud enviada al trabajador', 'Cerrar', { duration: 3000 });
-        this.router.navigate(['/solicitudes']);
+        this.router.navigate(['/app/solicitudes']);
       },
       error: (err) => {
         this.saving.set(false);
