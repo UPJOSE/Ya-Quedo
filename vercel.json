@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd tb2/frontend/yaquedo-web && npm run build",
+  "outputDirectory": "tb2/frontend/yaquedo-web/dist/yaquedo-web/browser",
+  "framework": null,
+  "installCommand": "cd tb2/frontend/yaquedo-web && npm install",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
