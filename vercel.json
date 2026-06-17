@@ -4,6 +4,9 @@
   "framework": null,
   "installCommand": "cd tb2/frontend/yaquedo-web && npm install",
   "rewrites": [
+    { "source": "/app/:path*", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/register", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
