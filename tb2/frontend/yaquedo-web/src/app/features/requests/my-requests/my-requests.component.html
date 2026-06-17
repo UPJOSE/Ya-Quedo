@@ -1,7 +1,7 @@
 <div class="container">
   <div class="header-row">
     <h1 class="page-title">Mis solicitudes</h1>
-    <button mat-raised-button color="primary" routerLink="/trabajadores">
+    <button mat-raised-button color="primary" routerLink="/app/trabajadores">
       <mat-icon>add</mat-icon> Nueva solicitud
     </button>
   </div>
@@ -71,7 +71,7 @@
               </button>
             }
             @if (s.estado === 'FINALIZADA' && auth.isCliente()) {
-              <a mat-icon-button color="accent" [routerLink]="['/resenas/nueva', s.id]" matTooltip="Calificar">
+              <a mat-icon-button color="accent" [routerLink]="['/app/resenas/nueva', s.id]" matTooltip="Calificar">
                 <mat-icon>star</mat-icon>
               </a>
             }

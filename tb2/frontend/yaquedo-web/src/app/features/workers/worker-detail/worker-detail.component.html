@@ -37,9 +37,9 @@
         </mat-card-content>
 
         <mat-card-actions align="end">
-          <a mat-button routerLink="/trabajadores">Volver</a>
+          <a mat-button routerLink="/app/trabajadores">Volver</a>
           <a mat-raised-button color="primary"
-             [routerLink]="['/solicitudes/nueva']"
+             [routerLink]="['/app/solicitudes/nueva']"
              [queryParams]="{ trabajadorId: t.id, categoriaId: t.categoriaId }">
             <mat-icon>send</mat-icon> Solicitar servicio
           </a>
