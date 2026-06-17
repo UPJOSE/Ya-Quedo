@@ -171,3 +171,50 @@ import { MatChipsModule } from '@angular/material/chips';
 
   styleUrl: './landing.component.css'
 })
+export class LandingComponent {
+  particles = Array.from({ length: 30 }, () => ({
+    x: Math.random() * 100,
+    y: Math.random() * 100
+  }));
+
+  services = [
+    { name: 'Electricidad', icon: 'electrical_services' },
+    { name: 'Gasfitería', icon: 'plumbing' },
+    { name: 'Pintura', icon: 'format_paint' },
+    { name: 'Carpintería', icon: 'carpenter' }
+  ];
+
+  techStack = [
+    { name: 'Angular 17', desc: 'Signals & SSR', icon: 'brush', color: '#dd0031' },
+    { name: 'Spring Boot', desc: 'Java 21 + VT', icon: 'cloud', color: '#6db33f' },
+    { name: 'PostgreSQL', desc: 'JSONB & Search', icon: 'storage', color: '#336791' },
+    { name: 'AI Core', desc: 'Neural Matching', icon: 'psychology', color: '#a855f7' }
+  ];
+
+  features = [
+    {
+      icon: 'neurology',
+      title: 'Matching IA',
+      desc: 'Algoritmos de ML analizan historial, ubicación y disponibilidad para conectar el trabajador perfecto.',
+      tags: ['ML', 'NLP', 'Geo']
+    },
+    {
+      icon: 'my_location',
+      title: 'Geolocalización',
+      desc: 'Ubicación en tiempo real con zonas de servicio dinámicas y estimación inteligente de tiempos.',
+      tags: ['GPS', 'Real-time']
+    },
+    {
+      icon: 'verified_user',
+      title: 'Trust Score',
+      desc: 'Sistema de reputación con calificaciones, historial y validación de documentos.',
+      tags: ['KYC', 'Reviews']
+    },
+    {
+      icon: 'payments',
+      title: 'Pagos Seguros',
+      desc: 'Gateway integrado con escrow, facturación electrónica y múltiples métodos de pago.',
+      tags: ['Escrow', 'Billing']
+    }
+  ];
+}
