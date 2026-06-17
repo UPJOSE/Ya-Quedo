@@ -50,12 +50,11 @@ import { MatChipsModule } from '@angular/material/chips';
           </div>
           <h1 class="hero-title">
             <span class="gradient-text">Conectamos</span>
-            <span class="hero-highlight">talento urbano</span>
+            <span class="hero-highlight">trabajadores independientes</span>
             <span class="gradient-text">con oportunidades</span>
           </h1>
           <p class="hero-subtitle">
-            Plataforma neural que une clientes con trabajadores independientes usando 
-            algoritmos de ML y geolocalización inteligente. La evolución del trabajo freelance.
+            Conectamos usuarios urbanos que necesitan servicios rápidos —electricistas, gasfiteros, pintores, técnicos— con trabajadores independientes cercanos y disponibles usando IA conversacional (Llama 3.3 70B) y geolocalización OpenStreetMap.
           </p>
           <div class="hero-metrics">
             <div class="metric">
@@ -194,15 +193,15 @@ export class LandingComponent {
   features = [
     {
       icon: 'neurology',
-      title: 'Matching IA',
-      desc: 'Algoritmos de ML analizan historial, ubicación y disponibilidad para conectar el trabajador perfecto.',
-      tags: ['ML', 'NLP', 'Geo']
+      title: 'Matching IA con Groq',
+      desc: 'Asistente conversacional Llama 3.3 70B que mejora el matching entre clientes y trabajadores independientes.',
+      tags: ['Groq', 'LLM', 'AI']
     },
     {
       icon: 'my_location',
-      title: 'Geolocalización',
-      desc: 'Ubicación en tiempo real con zonas de servicio dinámicas y estimación inteligente de tiempos.',
-      tags: ['GPS', 'Real-time']
+      title: 'OpenStreetMap Geocoding',
+      desc: 'Geolocalización precisa vía OpenStreetMap Nominatim. Calculo de distancia Haversine para matching local.',
+      tags: ['OSM', 'GPS', 'Maps']
     },
     {
       icon: 'verified_user',
